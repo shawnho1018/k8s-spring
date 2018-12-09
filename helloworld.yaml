@@ -1,0 +1,32 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld 
+  labels:
+    app: helloworld
+spec:
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: helloworld
+        image: harbor.syspks.com/helloworld/helloworld:0.2.0
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: regcred
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: helloworld
+spec:
+  selector:
+    app: helloworld
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
