@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.shawnho.pks</groupId>
     <artifactId>springboot</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <parent>
        <groupId>org.springframework.boot</groupId>
        <artifactId>spring-boot-starter-parent</artifactId>
@@ -45,13 +45,22 @@
 	       </executions>
 	       <configuration>
 		       <repository>harbor.syspks.com/helloworld/helloworld</repository>
-		       <tag>0.2.0</tag>
+		       <tag>${project.version}</tag>
 		       <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 		       <buildArgs>
 			       <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
 		       </buildArgs>
-	       </configuration>	       
+	       </configuration>
 	    </plugin>
         </plugins>	
     </build>
+    <distributionManagement>
+       <repository>
+          <uniqueVersion>false</uniqueVersion>
+          <id>Corp1</id>
+          <name>Harbor</name>
+          <url>scp://repo/maven2</url>
+          <layout>default</layout>
+       </repository>
+    </distributionManagement>	       
 </project>
